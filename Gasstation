@@ -1,0 +1,417 @@
+#include <iostream>
+#include <stdlib.h> 
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+class Benzun
+{
+	int NoZ;
+	int A95;
+	int A92;
+	int A98;
+	int Dp;
+	int lim;
+public:
+	Benzun();
+	int Ret() { return NoZ; }
+	void Show() 
+	{
+		cout << "Number   " << NoZ<<"\n";
+		cout << "A98  =  " << A98 << "\n";
+		cout << "A95  =  " << A95 << "\n";
+		cout << "A92  =  " << A92 << "\n";
+		cout << "Dp   =  " << Dp << "\n";
+	}
+	void Poch(int l) 
+	{
+		NoZ = l;
+	}
+	void Dod() 
+	{
+		system("cls");
+		cout << "Enter kind of petrol you want to add:" << "\n";
+		cout << "1   A98" << "\n";
+		cout << "2   A95" << "\n";
+		cout << "3   A92" << "\n";
+		cout << "4   Dp" << "\n";
+		cout << "5  Exit \n";
+		int g;
+		int k;
+		int y;
+		cin >> k;
+		switch (k)
+		{
+		case 1: system("cls"); cout << "Enter petrol A98 \n"; cin >> y;if (y + A98 < 1000)A98 = A98 + y;
+				else { system("cls"); cout << "This size can't be add \n"; cin >> g; }	break;
+		case 2: system("cls"); cout << "Enter petrol A95 \n"; cin >> y;if (y + A95 <= 1000)A95 = A95 + y;	
+				else { system("cls"); cout << "This size can't be add \n"; cin >> g; } break;
+		case 3: system("cls"); cout << "Enter petrol A92 \n"; cin >> y;if (y + A92 <= 1000)A92 = A92 + y;	
+				else { system("cls"); cout << "This size can't be add \n"; cin >> g; } break;
+		case 4: system("cls"); cout << "Enter petrol Dp \n"; cin >> y;if (y + Dp <= 1000)Dp = Dp + y;
+				else { system("cls"); cout << "This size can't be add \n"; cin >> g; } break;
+		case 5: break;
+		}
+	};
+	void Vid() 
+	{
+		cout << "Enter kind of petrol you want to minus:" << "\n";
+		cout << "1   A98" << "\n";
+		cout << "2   A95" << "\n";
+		cout << "3   A92" << "\n";
+		cout << "4   Dp" << "\n";
+		cout << "5  Exit \n";
+		int g;
+		int k;
+		int y;
+		cin >> k;
+		switch (k)
+		{
+		case 1: system("cls"); cout << "Enter petrol A98 \n";cin >> y;if (A98 - y >= 0)A98 = A98 - y;
+				else { system("cls"); cout << "This size can't be minus \n"; cin >> g; }	break;
+		case 2: system("cls"); cout << "Enter petrol A95 \n"; cin >> y; if (A95 - y >= 0)A95 = A95 - y;	
+				else { system("cls"); cout << "This size can't be minus \n"; cin >> g; }	break;
+		case 3: system("cls"); cout << "Enter petrol A92 \n"; cin >> y; if (A92 - y >= 0)A92 = A92 - y;	
+				else { system("cls"); cout << "This size can't be minus \n"; cin >> g; }	break;
+		case 4: system("cls"); cout << "Enter petrol Dp \n"; cin >> y; if (Dp - y >= 0)Dp = Dp - y;	
+				else { system("cls"); cout << "This size can't be minus \n"; cin >> g; }	break;
+		case 5:; break;
+		}
+	};
+};
+Benzun::Benzun()
+{
+	A95 = 0;
+	A92 = 0;
+	A98 = 0;
+	Dp = 0;
+	lim = 1000;
+}
+
+class LehAv :public Benzun 
+{
+	int gas;
+	int lim;
+public:
+	LehAv();
+	void DodG() 
+	{
+		system("cls"); int g; int y; y = 0; cout << "Enter Gas \n"; cin >> y; if (gas + y <= lim)gas = gas + y;
+		else { system("cls"); cout << "This size can't be add \n"; cin >> g; };
+	}
+	void VidG() 
+	{
+		system("cls"); int g; int y; y = 0; cout << "Enter Gas \n"; cin >> y; if (gas - y >= 0)gas = gas - y;
+		else { system("cls"); cout << "This size can't be minus \n"; cin >> g; };
+	}
+	void ShovG(int r) 
+	{
+		cout << "Gas  = " << gas<<"\n";
+		if (r == 0) {
+			cout << "Go back to mane manu press 1" << "\n";
+			int k;
+			cin >> k;
+			if (k == 1)
+				void main();
+		}
+		else {}
+	}
+};
+LehAv::LehAv() 
+{
+	gas = 0;
+	lim = 1000;
+}
+
+class VanAv :public Benzun 
+{
+	int tires;
+	int lim;
+public:
+	VanAv();
+	void DodV() {
+		system("cls"); int g; int y; y = 0; cout << "Enter Tires \n"; cin >> y; if (tires + y <= lim)tires = tires + y;
+		else { system("cls"); cout << "This size can't be add \n"; cin >> g; };
+	}
+	void ShowV() { cout << "Tires  = " << tires; }
+};
+VanAv::VanAv() {
+	tires = 0;
+	lim = 100;
+}
+
+class Menu 
+{
+	int countVan;
+	int nomVan;
+	VanAv  *f1;
+	int countLh;
+	int nomLh;
+	LehAv *f;
+public:
+	Menu() {
+		countVan = 0;
+		nomVan = 3;
+		f1 = new VanAv[nomVan];
+		countLh = 0;
+		nomLh = 3;
+		f = new LehAv[nomLh];
+	}
+	~Menu() { delete[]f; delete[]f1;}
+	void Opc()
+	{
+		int tu;
+		system("cls");
+		cout << "Mane Menu" << "\n";
+		cout << "Create Petrol Station for :" << "\n";
+		cout << "Cars press             1" << "\n";
+		cout << "Trucks press           2" << "\n";
+		cout << "See information about :" << "\n";
+		cout << "One car petrol press   3" << "\n";
+		cout << "All cars petrol press  4" << "\n";
+		cout << "Add petrol to station :" << "\n";
+		cout << "Cars press             5" << "\n";
+		cout << "See information about :" << "\n";
+		cout << "All Trucks press       6" << "\n";
+		cout << "Minus petrol to station :" << "\n";
+		cout << "Cars press             7" << "\n";
+		cout << "Exit press             8" << "\n";
+		cin >> tu;
+		switch (tu)
+		{
+		case 1:	
+			system("cls");
+			cout << "Enter number of Petrolstation :" << "\n";
+			int hj;
+			cin >> hj;
+			int iu;
+			iu = 0;
+			for (int i = 0; i < countLh ; i++)
+			{
+				if (f[i].Ret() == hj) 
+				{
+					system("cls");
+					cout << "This number of gasstation already exist try again" << "\n";
+					int t;
+					t = 10;
+					cin >> t;
+					iu++;
+				}
+			}
+			if (iu == 0) 
+			{
+				countLh++;
+				if (countLh >= nomLh)
+				{
+					LehAv* j = new LehAv[nomLh * 2];
+					for (int i = 0; i<countLh ; i++)
+						j[i] = f[i];
+					delete[]f;
+					f = j;
+				}
+				f[countLh - 1].Poch(hj); 
+				int j;
+				j = 0;
+				do {
+					system("cls");
+					cout << "If you want enter petrol press   1\n";
+					cout << "If you want enter gas press      2\n";
+					cout << "If you want exit press           3\n";
+					cin >> j;
+					switch (j)
+					{
+					case 1:f[countLh - 1].Dod(); break;
+					case 2: f[countLh - 1].DodG(); break;
+					}
+				   } while (j != 3);		
+			}
+			Opc();
+			break;
+		case 2: 
+			system("cls");
+			cout << "Enter number of Petrolstation :" << "\n";
+			int g;
+			cin >> g;
+			int q;
+			q = 0;
+			for (int i = 0; i < countVan; i++)
+			{
+				if (f1[i].Ret() == g) 
+				{
+					system("cls");
+					cout << "This number of gasstation already exist try again" << "\n";
+					int t;
+					t = 10;
+					cin >> t;
+					q++;
+				}
+			}
+			if (q == 0)
+			{
+				countVan++;
+				if (countVan >= nomVan)
+				{
+					VanAv* j1 = new VanAv[nomVan * 2];
+					for (int i = 0; i<countVan; i++)
+						j1[i] = f1[i];
+					delete[]f1;
+					f1 = j1;
+				}
+				f1[countVan - 1].Poch(g);
+				f1[countVan - 1].Dod();
+				f1[countVan - 1].DodV();	
+			}
+			Opc();
+			break;
+		case 3:
+			system("cls");
+			cout << "Enter gasstation number wich you want to see" << "\n";
+			int hj2;
+			cin >> hj2;
+			int iu2;
+			iu2 = 0;
+			int zm;
+			zm = 0;
+			for (int i = 0; i < countLh; i++)
+			{
+				if (f[i].Ret() == hj2) 
+				{
+					iu2++;
+					zm = i;
+				}
+			}
+			if (iu2 == 1)
+			{
+				system("cls");
+				f[zm].Show();
+				f[zm].ShovG(0);
+			}
+			else 
+			{
+				int stop;
+				cout << "This number of gasstation don't exist try again" << "\n";
+				cin >> stop;
+			}
+			Opc();
+			break;
+		case 4:	
+			system("cls");
+			for (int i = 0; i < countLh; i++)
+		{
+				f[i].Show();
+				f[i].ShovG(1);
+		}
+			cout << "Go back to mane menu press 1" << "\n";
+			int k;
+			cin >> k;
+			if (k == 1)
+				Opc();
+			Opc();
+			break;
+		case 5:
+			system("cls");
+			cout << "What petrollstation you want add inormation  :" << "\n";
+			int hj1;
+			cin >> hj1;
+			int iu1;
+			iu1 = 0;
+			int zm1;
+			zm1 = 0;
+			for (int i = 0; i < countLh; i++)
+			{
+				if (f[i].Ret() == hj1) 
+				{
+					iu1++;
+					zm1 = i;
+				}
+			}
+			if (iu1 == 1) 
+			{
+				int j;
+				j = 0;
+				do {
+					system("cls");
+					cout << "If you want enter petrol press   1\n";
+					cout << "If you want enter gas press      2\n";
+					cout << "If you want exit press           3\n";
+					cin >> j;
+					switch (j)
+					{
+					case 1:f[zm1].Dod(); break;
+					case 2: f[zm1].DodG(); break;
+					}
+				} while (j != 3);
+			}
+			else
+			{
+				int stop;
+				cout << "This number of gasstation don't exist try again" << "\n";
+				cin >> stop;
+			}
+			Opc();
+			break;
+case 6: 
+	system("cls");
+	for (int i = 0; i < countVan; i++)
+	{
+		f1[i].Show();
+		f1[i].ShowV();
+		cout << "\n";
+	}	
+	int r;
+	r = 0;
+	cout << "\n";
+	cin >> r;
+	Opc();
+	break;
+case 7:			
+	system("cls");
+	cout << "What petrollstation you want minus inormation  :" << "\n";
+	int hj3;
+	cin >> hj3;
+	int iu3;
+	iu3 = 0;
+	int zm3;
+	zm3 = 0;
+	for (int i = 0; i < countLh; i++)
+	{
+		if (f[i].Ret() == hj3) {
+			iu3++;
+			zm3 = i;
+		}
+	}
+	if (iu3 == 1)
+	{
+		int j;
+		j = 0;
+		do {
+			system("cls");
+			cout << "If you want minus petrol press   1\n";
+			cout << "If you want minus gas press      2\n";
+			cout << "If you want exit press           3\n";
+			cin >> j;
+			switch (j)
+			{
+			case 1:f[zm3].Vid(); break;
+			case 2: f[zm3].VidG(); break;
+			}
+		} while (j != 3);
+	}
+	else {
+		int stop;
+		cout << "This number of gasstation don't exist try again" << "\n";
+		cin >> stop;
+	}
+	Opc();
+	break;
+case 8:exit(1); break;
+		}		
+	}
+};
+int main()
+{
+		Menu m;
+		m.Opc();
+	return 0;
+}
